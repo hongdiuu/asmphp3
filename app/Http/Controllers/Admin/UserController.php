@@ -26,17 +26,17 @@ class UserController extends Controller
 
     public function addUsers(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'name'],
-            'email' => ['required', 'email'],
-            'password' => 'required',
-            'role' => 'required',
-        ], [
-            'name.required' => 'Tên không được bỏ trống',
-            'email.required' => 'Email không được để trống',
-            'password.required' => 'Password không được để trống',
-            'role.required' => 'Role không được bỏ trống',
-        ]);
+        // $request->validate([
+        //     'name' => ['required', 'name'],
+        //     'email' => ['required', 'email'],
+        //     'password' => 'required',
+        //     'role' => 'required',
+        // ], [
+        //     'name.required' => 'Tên không được bỏ trống',
+        //     'email.required' => 'Email không được để trống',
+        //     'password.required' => 'Password không được để trống',
+        //     'role.required' => 'Role không được bỏ trống',
+        // ]);
 
         $check = User::where('email', $request->email)->exists();
         if (!$check) {
@@ -98,11 +98,5 @@ class UserController extends Controller
             'message' => 'Chỉnh Sửa Thành Công',
         ]);
     }
-
-    public function listClients()
-    {
-        return view('client.product.list-client');
-    }
-
 
 }

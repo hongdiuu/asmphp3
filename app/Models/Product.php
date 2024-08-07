@@ -18,7 +18,14 @@ class Product extends Model
         'description',
         'category_id',
     ];
+
+    public function images(){
+        return $this->hasMany(ProductImage::class , 'product_id');
+    }
+
+    // belongs to la thuoc ve 
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    
 }

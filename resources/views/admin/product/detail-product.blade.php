@@ -27,7 +27,10 @@
                 Mô Tả Sản Phẩm
                 <span class="font-weight-bold">{{ $listProducts->description }}</span>
             </p>
-    
+            <p>
+                Danh Mục Sản Phẩm:
+                <span class="font-weight-bold">{{ $listProducts->category->name ?? 'Không có danh mục' }}</span>
+            </p>
             <a href="{{ route('admin.product.listProducts') }}" class="btn btn-info mt-3">Quay lai</a>
         </div>
     </div>

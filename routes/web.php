@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Models\User;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\Client\HomeController;
 use App\Models\Product;
 
 /*
@@ -40,10 +43,6 @@ Route::post('register', [AuthenController::class, 'postRegister'])->name('postRe
 
 // Quên mật khẩu
 Route::get('forgot', [AuthenController::class, 'forgotPassword'])->name('forgotPassword');
-Route::post('forgot', [AuthenController::class, 'postForgotPassword'])->name('password.email');
-Route::get('reset-password/{token}', [AuthenController::class, 'resetPassword'])->name('resetPassword.reset');
-Route::post('reset-password', [AuthenController::class, 'postResetPassword'])->name('postResetPassword.update');
-
 
 
 // ADMIN
@@ -56,6 +55,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'checkAdmin
         Route::delete('delete-user', [UserController::class, 'deleteUsers'])->name('deleteUsers');
         Route::get('detail-user', [UserController::class, 'detailUsers'])->name('detailUsers');
         Route::patch('update-user', [UserController::class, 'updatelUsers'])->name('updatelUsers');
+        
     });
     Route::group(['prefix' => 'product' , 'as' => 'product.'],function(){
         Route::get('list-product',[ProductController::class ,'listProducts'])->name('listProducts');
@@ -75,9 +75,29 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'checkAdmin
         Route::get('update-category/{idProduct}', [CategoryController::class, 'updateCategories'])->name('updateCategories');
         Route::patch('update-category/{idProduct}', [CategoryController::class, 'updatePatchCategories'])->name('updatePatchCategories');
     });
+
+    Route::group(['prefix' => 'banner' , 'as' => 'banner.'], function(){
+        Route::get('list-banner', [BannerController::class, 'listBanner'])->name('listBanner');
+        Route::get('add-banner', [BannerController::class, 'addBanner'])->name('addBanner');
+        Route::post('add-banner', [BannerController::class, 'addPostBanner'])->name('addPostBanner');
+        Route::delete('delete-banner', [BannerController::class, 'deleteBanner'])->name('deleteBanner');
+        Route::get('detail-banner/{idProduct}',[BannerController::class, 'detailBanner'])->name('detailBanner');
+        Route::get('update-banner/{idProduct}', [BannerController::class, 'updateBanner'])->name('updateBanner');
+        Route::patch('update-banner/{idProduct}', [BannerController::class, 'updatePatchBanner'])->name('updatePatchBanner');
+    });
+});
+
+Route::get('/', function(){
+    return redirect()->route('client.listClients');
 });
 Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
-    Route::get('list-client', [UserController::class, 'listClients'])->name('listClients');
+    Route::get('list-client', [HomeController::class, 'listClients'])->name('listClients');
+    Route::get('product-shop', [HomeController::class, 'product'])->name('product');
+    Route::get('detail-product/{id}', [HomeController::class, 'detailProduct'])->name('detailProduct');
+    Route::get('search-product', [HomeController::class, 'searchProduct'])->name('searchProduct');
+    Route::get('search-product-shop', [HomeController::class, 'searchProductShop'])->name('searchProductShop');
+
+    
 });
 
 

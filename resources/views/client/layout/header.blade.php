@@ -2,33 +2,33 @@
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
-        <div class="top-bar">
-            <div class="content-topbar flex-sb-m h-full container">
+        <div class="top-bar"  style="  background-color: pink !important;">
+            <div class="content-topbar flex-sb-m h-full container" >
                 <div class="left-top-bar">
-                    Free shipping for standard order over $100
+
                 </div>
         
-                <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                <div class="right-top-bar flex-w h-full text-black">
+                    <a href="#" class="flex-c-m trans-04 p-lr-25"  style="    color: black !important;">
                         Help & FAQs
                     </a>
         
-                    <a href="{{ route('register') }}" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{ route('register') }}" class="flex-c-m trans-04 p-lr-25"  style="    color: black !important;">
                         My Account
                     </a>
                     
-                    <a href="{{ route('login') }}" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{ route('login') }}" class="flex-c-m trans-04 p-lr-25"  style="    color: black !important;">
                         Login
                     </a>
                     
-                    <a href="{{ route('logout') }}" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{ route('logout') }}" class="flex-c-m trans-04 p-lr-25"  style="    color: black !important;">
                         Logout
                     </a>
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        EN
+                    <a href="{{route('admin.users.dashBoard')}}" class="flex-c-m trans-04 p-lr-25"  style="    color: black !important;">
+                        Admin
                     </a>
         
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a href="#" class="flex-c-m trans-04 p-lr-25"  style="    color: black !important;">
                         USD
                     </a>
                 </div>
@@ -40,23 +40,23 @@
                 
                 <!-- Logo desktop -->		
                 <a href="#" class="logo">
-                    <img src="{{ asset('client/assets/images/icons/logo-01.png')}}" alt="IMG-LOGO">
+                    <img src="{{ asset('client/assets/images/icons/logo_color.png')}}" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="active-menu">
-                            <a href="index.html">Home</a>
+                            <a href="{{route('client.listClients')}}">Home</a>
                             <ul class="sub-menu">
-                                <li><a href="index.html">Homepage 1</a></li>
-                                <li><a href="home-02.html">Homepage 2</a></li>
-                                <li><a href="home-03.html">Homepage 3</a></li>
+                                <li><a href="{{route('client.listClients')}}">Homepage 1</a></li>
+                                <li><a href="{{route('client.listClients')}}">Homepage 2</a></li>
+                                <li><a href="{{route('client.listClients')}}">Homepage 3</a></li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="{{route('client.product')}}">Shop</a>
                         </li>
 
                         <li class="label1" data-label1="hot">

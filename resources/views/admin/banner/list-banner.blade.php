@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 @section('title')
     @parent
-    Danh Sách Tài Khoản
+    Danh Sách Banner
 @endsection
 @push('style')
 @endpush
@@ -15,10 +15,10 @@
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
         @if (session('message'))
-        <div class="alert alert-info" role="alert">
-            {{ session('message') }}
-        </div>
-    @endif
+            <div class="alert alert-info" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
         <!-- Content Row -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -26,7 +26,7 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-3">
-                    <a href="{{ route('admin.product.addProduct') }}" class="btn btn-success">Thêm Mới</a>
+                    <a href="{{ route('admin.banner.addBanner') }}" class="btn btn-success">Thêm Mới</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -34,10 +34,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Ảnh Sản Phẩm</th>
-                                <th>Price</th>
-                                <th>Description</th>
-                                <th>CateGory_ID</th>
+                                <th>Hình Ảnh</th>
+                                <th>Mô Tả</th>
+                                <th>created_at</th>
+                                <th>updated_at</th>
                                 <th>Hành Động</th>
                             </tr>
                         </thead>
@@ -45,32 +45,32 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Ảnh Sản Phẩm</th>
-                                <th>Price</th>
-                                <th>Description</th>
-                                <th>CateGory_ID</th>
+                                <th>Hình Ảnh</th>
+                                <th>Mô Tả</th>
+                                <th>created_at</th>
+                                <th>updated_at</th>
                                 <th>Hành Động</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($listProducts as $item)
+                            @foreach ($listBanner as $item => $value)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item + 1 }}</td>
+                                    <td>{{ $value->name }}</td>
                                     <td>
-                                        <img src="{{ asset($item->image) }}" width="150px" alt="">
+                                        <img src="{{ asset($value->image) }}" width="150px" alt="">
                                     </td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>{{ $item->description }}</td>
-                                    <td>{{ $item->category->name }}</td>
+                                    <td>{{ $value->description }}</td>
+                                    <td>{{ $value->created_at }}</td>
+                                    <td>{{ $value->updated_at }}</td>
                                     <td>
-                                        <a href="{{ route('admin.product.detailProduct', $item->id) }}" class="btn btn-info" title="Chi Tiết">
+                                        <a href="{{ route('admin.banner.detailBanner', $value->id) }}" class="btn btn-info" title="Chi Tiết">
                                             <i class="fas fa-info-circle"></i>
                                         </a> |
-                                        <a href="{{ route('admin.product.updateProduct', $item->id) }}" class="btn btn-warning" title="Sửa">
+                                        <a href="{{ route('admin.banner.updateBanner', $value->id) }}" class="btn btn-warning" title="Sửa">
                                             <i class="fas fa-edit"></i>
                                         </a> |
-                                        <button data-id="{{ $item->id }}" data-toggle="modal" data-target="#modelDelete" class="btn btn-danger" title="Xoá">
+                                        <button data-id="{{ $value->id }}" data-toggle="modal" data-target="#modelDelete" class="btn btn-danger" title="Xoá">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -78,7 +78,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $listProducts->links('pagination::bootstrap-4') }}
+                    {{-- {{ $listCategories->links('pagination::bootstrap-4') }} --}}
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modelDeleteLabel">Xoá User</h5>
+                    <h5 class="modal-title" id="modelDeleteLabel">Xoá Banner</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -114,7 +114,7 @@
         var recipient = button.data('id') // Extract info from data-* attributes
 
         var confirmDelete = $('#confirmDelete')
-        confirmDelete.attr('action', '{{ route('admin.product.deleteProduct') }}?id=' + recipient)
+        confirmDelete.attr('action', '{{ route('admin.banner.deleteBanner') }}?id=' + recipient)
     })
 </script>
 @endpush

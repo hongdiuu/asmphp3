@@ -66,15 +66,15 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAccount"
             aria-expanded="true" aria-controls="collapseAccount">
             <i class="fas fa-fw fa-user"></i>
-            <span>Quản Lí Tài Khoản</span>
+            <span>Quản lí Banner</span>
         </a>
-        {{-- <div id="collapseAccount" class="collapse" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
+        <div id="collapseAccount" class="collapse" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Account Management:</h6>
-                <a class="collapse-item" href="user-list.html">Danh Sách Người Dùng</a>
-                <a class="collapse-item" href="admin-list.html">Danh Sách Admin</a>
+                <a class="collapse-item" href="{{route('admin.banner.listBanner')}}">Danh Sách Banner</a>
+                {{-- <a class="collapse-item" href="admin-list.html">Danh Sách Admin</a> --}}
             </div>
-        </div> --}}
+        </div>
     </li>
     
     

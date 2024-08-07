@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CategoryRequest;
 class CategoryController extends Controller
 {
     public function listCategories(){
@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function addCategories(){
         return view('admin.category.add-category');
     }
-      public function addPostCategories(Request $request){
+      public function addPostCategories(CategoryRequest $request){
         $data = [
             'name' => $request->nameCategory,
             'created_at' => Carbon::now(),

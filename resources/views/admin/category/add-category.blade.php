@@ -9,6 +9,9 @@
 @section('content')
     <div class="container">
         <h3 class="text-center">Thêm Danh Mục</h3>
+        @if (session('message'))
+        <p class="text-danger">{{session('message')}} </p>
+    @endif
         <div class="p-4" style="min-height: 800px;">
             <form action="{{ route('admin.category.addPostCategories') }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -17,6 +20,9 @@
                     <label for="nameProduct" class="form-label">Tên Danh Mục</label>
                     <input type="text" class="form-control" id="nameCategory" name="nameCategory"
                         placeholder="Tên Danh Mục">
+                        @error (('nameCategory'))
+                        <p class="text-danger">{{$message}} </p>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Thêm</button>
             </form>

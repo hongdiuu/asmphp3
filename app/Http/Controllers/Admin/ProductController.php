@@ -7,22 +7,28 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
     public function listProducts()
     {
-        $listProducts = Product::paginate(7);
+        // images duoc lay tu ham ben product model
+        $listProducts = Product::with('images:id,product_id,image_url')->with('category:id,name')->paginate(4);
         return view('admin.product.list-product')->with(['listProducts' => $listProducts]);
     }
     public function addProduct()
     {
+        // dd('hiada');
         $categories = Category::select('id', 'name')->get();
+        // dd($categories);
         return view('admin.product.add-product')->with(['categories' => $categories]);
     }
 
-    public function addPostProduct(Request $request)
+    public function addPostProduct(ProductRequest $request)
     {
+        // dd($request->all());
         $imageURL = '';
         if ($request->hasFile('imageProduct')) {
             $image = $request->file('imageProduct');
@@ -67,7 +73,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function updatePactchProduct(Request $request, $idProduct)
+    public function updatePactchProduct(UpdateProductRequest $request, $idProduct)
     {
 
         $listProducts = Product::where('id', $idProduct)->first();
@@ -91,4 +97,8 @@ class ProductController extends Controller
         Product::where('id', $idProduct)->update($data);
         return redirect()->route('admin.product.listProducts')->with(['message' => 'Sửa Thành Công']);
     }
+
+    
+
+
 }
